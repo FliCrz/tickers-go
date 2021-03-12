@@ -3,10 +3,27 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"tickers/src/libs/exchanges"
+	"tickers/src/models"
 
 	"github.com/spf13/cobra"
 )
 
+// Verbose ...
+var Verbose bool
+
+// TickersFuncs ...
+var TickersFuncs = map[string]func() []models.Ticker {
+	"binance": exchanges.GetBinanceTickers,
+	"bitfinex": exchanges.GetBitfinexTickers,
+	"bittrex": exchanges.GetBittrexTickers,
+	"btcpop": exchanges.GetBtcPopTickers,
+	"huobi": exchanges.GetHuobiTickers,
+	"kraken": exchanges.GetKrakenTickers,
+	"kucoin": exchanges.GetKucoinTickers,
+	"okex": exchanges.GetOkexTickers,
+	"poloniex": exchanges.GetPoloniexTickers,
+	"liquid": exchanges.GetLiquidTickers}
 
 var rootCmd = &cobra.Command{
 	Use:   "tickers",
@@ -15,9 +32,6 @@ var rootCmd = &cobra.Command{
 	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {},
 }
-
-// Verbose ...
-var Verbose bool
 
 func init() {
 	rootCmd.PersistentFlags().BoolVarP(&Verbose, "verbose", "v", false, "verbose output")

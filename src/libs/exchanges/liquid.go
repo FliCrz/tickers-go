@@ -1,7 +1,6 @@
 package exchanges
 
 import (
-	"log"
 	"tickers/src/models"
 	"time"
 )
@@ -10,8 +9,6 @@ var liquidBaseURL = "https://api.liquid.com"
 
 // GetLiquidTickers ...
 func GetLiquidTickers () []models.Ticker {
-
-	log.Println("Getting data from bitflyer")
 
 	var tickers []models.Ticker
 

@@ -10,8 +10,6 @@ import (
 // GetBtcPopTickers ...
 func GetBtcPopTickers() []models.Ticker {
 
-	log.Println("Getting data from btcpop.")
-
 	url := "https://btcpop.co/api/market-public.php"
 	
 	data := makeRequest(url)

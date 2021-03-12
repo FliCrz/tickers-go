@@ -1,5 +1,5 @@
 # tickers
-tickers is a cli tool to detect arbitrage opportunities among supported exchanges.
+tickers is a cli tool to return tickers from supported exchanges.
 
 ## Usage
 `tickers [flags]` <br> `tickers [command]` <br>

@@ -1,11 +1,34 @@
 package cmd
 
 import (
+	"encoding/json"
+	"fmt"
 	"log"
-	"tickers/src/utils"
 
 	"github.com/spf13/cobra"
 )
+
+// GetAvailableExchangesMethod ...
+func GetAvailableExchangesMethod () []string {
+
+	if Verbose {
+		log.Println("Getting available exchanges")
+	}
+
+	exchanges := []string {
+		"binance",
+		"bitfinex",
+		"bittrex",
+		"btcpop",
+		"huobi",
+		"kraken",
+		"kucoin",
+		"okex",
+		"poloniex",
+		"liquid"}
+
+	return exchanges
+}
 
 var listExchangesCmd = &cobra.Command{
 	Use:   "exchanges",
@@ -14,9 +37,15 @@ var listExchangesCmd = &cobra.Command{
 	Args: cobra.NoArgs,
 
 	Run: func(cmd *cobra.Command, args []string) {
-		exchanges := utils.GetAvailableExchangesMethod()	
-		for _, i := range exchanges {
-			log.Println(i)
-		}	
+		exchanges := GetAvailableExchangesMethod()
+		if Verbose {
+			for _, i := range exchanges {
+				log.Println(i)
+			}	
+		}
+
+		jsonData, _ := json.Marshal(exchanges)
+
+		fmt.Printf("%s\n", string(jsonData))
 	},
 }

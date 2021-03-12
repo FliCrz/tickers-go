@@ -11,8 +11,6 @@ import (
 // GetBittrexTickers ...
 func GetBittrexTickers() []models.Ticker {
 
-	log.Println("Getting data from bittrex.")
-
 	url := "https://api.bittrex.com/v3/markets/tickers"
 	
 	data := makeRequest(url)

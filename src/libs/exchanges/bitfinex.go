@@ -13,7 +13,6 @@ var bitfinexAPIURL = "https://api-pub.bitfinex.com/v2"
 // GetBitfinexTickers ...
 func GetBitfinexTickers() []models.Ticker {
 
-	log.Println("Getting data from bitfinex.")
 	url := bitfinexAPIURL + "/tickers?symbols=ALL"
 	
 	data := makeRequest(url)

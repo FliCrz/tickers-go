@@ -1,7 +1,6 @@
 package exchanges
 
 import (
-	"log"
 	"strconv"
 	"strings"
 	"tickers/src/models"
@@ -12,8 +11,6 @@ var kucoinBaseURL = "https://api.kucoin.com"
 
 // GetKucoinTickers ...
 func GetKucoinTickers () []models.Ticker {
-
-	log.Println("Getting data from kucoin")
 
 	var tickers []models.Ticker
 

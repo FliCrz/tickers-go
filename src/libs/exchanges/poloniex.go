@@ -13,8 +13,6 @@ var poloniexBaseURL = "https://poloniex.com/public"
 // GetPoloniexTickers ...
 func GetPoloniexTickers () []models.Ticker {
 
-	log.Println("Getting data from poloniex")
-
 	var tickers []models.Ticker
 
 	url := poloniexBaseURL + "?command=returnTicker"

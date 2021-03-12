@@ -1,3 +1,8 @@
+# v0.0.3
+- cleaned code
+- return in json
+- return in log format with -v flag
+
 # v0.0.2
 - fixed README.md
 

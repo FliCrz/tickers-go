@@ -12,9 +12,7 @@ var okexBaseURL = "https://www.okex.com"
 
 // GetOkexTickers ...
 func GetOkexTickers () []models.Ticker {
-
-	log.Println("Getting data from okex")
-
+	
 	var tickers []models.Ticker
 
 	url := okexBaseURL + "/api/spot/v3/instruments/ticker"

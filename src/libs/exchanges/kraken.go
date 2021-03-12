@@ -1,7 +1,6 @@
 package exchanges
 
 import (
-	"fmt"
 	"log"
 	"net/url"
 	"strconv"
@@ -14,8 +13,6 @@ import (
 func GetKrakenTickers() []models.Ticker {
 	
 	var tickers []models.Ticker
-	
-	fmt.Println("Getting data from kraken.")
 
 	symbolsRequest := url.Values{}
 	symbols := getKrakenRawSymbols()

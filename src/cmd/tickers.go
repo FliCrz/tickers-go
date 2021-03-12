@@ -2,12 +2,28 @@ package cmd
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
-	"tickers/src/utils"
+	"tickers/src/models"
 
 	"github.com/spf13/cobra"
 )
 
+// GetTickersMethod ...
+func GetTickersMethod(args []string) [][]models.Ticker{
+
+	if Verbose {
+		log.Printf("Getting Tickers for %s\n", args)
+	}
+
+	var tickers [][]models.Ticker
+	
+	for _, i := range args {
+		tickers = append(tickers, TickersFuncs[i]())
+	}
+
+	return tickers
+}
 
 var tickersCmd = &cobra.Command{
 	Use:   "tickers [exchange] [exchange - optional]",
@@ -17,21 +33,30 @@ var tickersCmd = &cobra.Command{
 
 	Run: func(cmd *cobra.Command, args []string) {
 
-		tickers := utils.GetTickersMethod(args)
+		tickers := GetTickersMethod(args)
 
-		for _, i := range tickers{
-			for _, o := range i {
-				if Verbose == true {
+		if Verbose == true {
+			for _, i := range tickers{
+				for _, o := range i {
+					
 					jsonData, err := json.Marshal(o)
+					
 					if err != nil {
-						log.Fatalln(err)
+						log.Println(err)
 					}
+
 					log.Println(string(jsonData))
-				} else {
-					log.Println(o)
 				}
 			}
 		}
+
+		jsonData, err := json.Marshal(tickers)
+
+		if err != nil {
+			log.Println(err)
+		}
+
+		fmt.Printf("%s\n", string(jsonData))
 	},
 }
 

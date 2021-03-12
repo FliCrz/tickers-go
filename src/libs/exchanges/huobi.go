@@ -10,8 +10,6 @@ import (
 // GetHuobiTickers ...
 func GetHuobiTickers() []models.Ticker {
 
-	log.Println("Getting data from huobi.")
-
 	url := "https://api.huobi.pro/market/tickers"
 	
 	data := makeRequest(url)

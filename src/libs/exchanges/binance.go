@@ -12,8 +12,6 @@ var binanceAPIURL =  "https://api.binance.com/api/v3"
 // GetBinanceTickers ...
 func GetBinanceTickers() []models.Ticker {
 
-	log.Println("Getting data from binance.")
-
 	url := binanceAPIURL + "/ticker/bookTicker"
 	
 	data := makeRequest(url)
