@@ -23,6 +23,6 @@ Use `tickers [command] --help` for more information about a command.
 ## Build
 To build depending of the OS.
 
-`make build-linux`        for linux build.
-`make build-mac`          for mac build.
+`make build-linux`        for linux build. <br>
+`make build-mac`          for mac build. <br>
 `make build-win`          for windows build.
