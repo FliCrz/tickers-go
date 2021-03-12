@@ -1,3 +1,6 @@
+# v0.1.1
+- removed unused external libs.
+
 # v0.1.0
 - fixed README.md
 - Initial Release (beta)
