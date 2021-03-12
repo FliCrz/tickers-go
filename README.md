@@ -5,7 +5,6 @@ tickers is a cli tool to detect arbitrage opportunities among supported exchange
 `tickers [flags]` <br> `tickers [command]` <br>
 
 ## Available Commands
-`arb`                     get arbitrage opportunities <br>
 `common`                  list common symbols for 2 or more exchanges <br>
 `help`                    help about any command <br>
 `exchanges`               list supported exchanges <br>
