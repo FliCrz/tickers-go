@@ -25,13 +25,26 @@ func GetHitbtcTickers() []models.Ticker {
 
 		reparsed := i.(map[string]interface{})
 
+		// log.Println(reparsed)
+
 		symbol := reparsed["symbol"].(string)
 		coin := strings.SplitN(reparsed["symbol"].(string), "", 2)[0]
 		cur := strings.SplitN(reparsed["symbol"].(string), "", 2)[1]
 		
+		var bidPrice float64
+		var askPrice float64
 
-		bidPrice, _ := strconv.ParseFloat(reparsed["bid"].(string), 64)
-		askPrice, _ := strconv.ParseFloat(reparsed["ask"].(string), 64)
+		if reparsed["bid"] == nil {
+			bidPrice = 0.0
+		} else {
+			bidPrice, _ = strconv.ParseFloat(reparsed["bid"].(string), 64)
+		}
+
+		if reparsed["ask"] == nil {
+			askPrice = 0.0
+		} else {
+			askPrice, _ = strconv.ParseFloat(reparsed["ask"].(string), 64)
+		}
 		
 		tickers = append(tickers, models.Ticker{
 			Coin: coin,
