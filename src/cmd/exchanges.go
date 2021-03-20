@@ -20,12 +20,14 @@ func GetAvailableExchangesMethod () []string {
 		"bitfinex",
 		"bittrex",
 		"btcpop",
+		"hitbtc",
 		"huobi",
 		"kraken",
 		"kucoin",
+		"liquid", 
 		"okex",
 		"poloniex",
-		"liquid"}
+	}
 
 	return exchanges
 }
