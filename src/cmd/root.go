@@ -23,7 +23,8 @@ var TickersFuncs = map[string]func() []models.Ticker {
 	"kucoin": exchanges.GetKucoinTickers,
 	"okex": exchanges.GetOkexTickers,
 	"poloniex": exchanges.GetPoloniexTickers,
-	"liquid": exchanges.GetLiquidTickers}
+	"liquid": exchanges.GetLiquidTickers,
+	"hitbtc": exchanges.GetHitbtcTickers}
 
 var rootCmd = &cobra.Command{
 	Use:   "tickers",

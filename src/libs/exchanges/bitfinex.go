@@ -29,7 +29,7 @@ func GetBitfinexTickers() []models.Ticker {
 
 		symbol := reparsed[0].(string)
 
-		if strings.Index(symbol, "t") == 0 && strings.Contains(symbol, ":") == false && strings.Contains(symbol, "-") == false {
+		if strings.Index(symbol, "t") == 0 && strings.Contains(symbol, ":") && strings.Contains(symbol, "-") {
 
 			symbol = symbol[1:]
 			rawCoin := symbol[:len(symbol) / 2]
@@ -58,15 +58,15 @@ func GetBitfinexTickers() []models.Ticker {
 			askQty := reparsed[4].(float64)
 		
 			tickers = append(tickers, models.Ticker{
-				coin,
-				cur,
-				coin + cur,
-				bidPrice,
-				bidQty,
-				askPrice,
-				askQty,
-				"bitfinex",
-				int(time.Now().Unix())})
+				Coin: coin,
+				Currency: cur,
+				Symbol: symbol,
+				BidPrice: bidPrice,
+				BidQty: bidQty,
+				AskPrice: askPrice,
+				AskQty: askQty,
+				Exchange: "bitfinex",
+				Timestamp: int(time.Now().Unix())})
 		}
 	}
 
@@ -90,10 +90,7 @@ func getBitfinexRawSymbols () []interface{} {
 	// log.Println(data)
 	parsed := data.([]interface{})
 	for _, i := range parsed {
-		for _, m := range i.([]interface{}){
-			// log.Println(m)
-			symbols = append(symbols, m)
-		}
+		symbols = append(symbols, i.([]interface{}))
 	}
 
 	return symbols

@@ -8,10 +8,12 @@ import (
 	"time"
 )
 
-// GetBittrexTickers ...
-func GetBittrexTickers() []models.Ticker {
+var hitbtcAPIURL =  "https://api.hitbtc.com/api/2"
 
-	url := "https://api.bittrex.com/v3/markets/tickers"
+// GetBinanceTickers ...
+func GetHitbtcTickers() []models.Ticker {
+
+	url := hitbtcAPIURL + "/public/ticker"
 	
 	data := makeRequest(url)
 
@@ -24,26 +26,26 @@ func GetBittrexTickers() []models.Ticker {
 		reparsed := i.(map[string]interface{})
 
 		symbol := reparsed["symbol"].(string)
-		coin := strings.Split(symbol, "-")[0]
-		cur := strings.Split(symbol, "-")[1]
-		bidPrice, _ := strconv.ParseFloat(reparsed["bidRate"].(string), 64)
-		askPrice, _ := strconv.ParseFloat(reparsed["askRate"].(string), 64)
+		coin := strings.SplitN(reparsed["symbol"].(string), "", 2)[0]
+		cur := strings.SplitN(reparsed["symbol"].(string), "", 2)[1]
+		
+
+		bidPrice, _ := strconv.ParseFloat(reparsed["bid"].(string), 64)
+		askPrice, _ := strconv.ParseFloat(reparsed["ask"].(string), 64)
 		
 		tickers = append(tickers, models.Ticker{
 			Coin: coin,
 			Currency: cur,
-			Symbol: coin + cur,
+			Symbol: symbol,
 			BidPrice: bidPrice,
 			BidQty: 0.0,
 			AskPrice: askPrice,
 			AskQty: 0.0,
-			Exchange: "bittrex",
+			Exchange: "hitbtc",
 			Timestamp: int(time.Now().Unix())})
 	}
-
 	if len(tickers) == 0 {
-		log.Println("Could not get tickers from bittrex.")
+		log.Println("Could not get tickers from hitbtc.")
 	}
-
 	return tickers
 }

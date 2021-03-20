@@ -39,25 +39,21 @@ func GetBinanceTickers() []models.Ticker {
 			}
 		}
 
-		bidPrice, err := strconv.ParseFloat(reparsed["bidPrice"].(string), 64)
-		bidQty, err := strconv.ParseFloat(reparsed["bidQty"].(string), 64)
-		askPrice, err := strconv.ParseFloat(reparsed["askPrice"].(string), 64)
-		askQty, err := strconv.ParseFloat(reparsed["askQty"].(string), 64)
-		
-		if err != nil {
-			log.Fatal(err)
-		}
+		bidPrice, _ := strconv.ParseFloat(reparsed["bidPrice"].(string), 64)
+		bidQty, _ := strconv.ParseFloat(reparsed["bidQty"].(string), 64)
+		askPrice, _ := strconv.ParseFloat(reparsed["askPrice"].(string), 64)
+		askQty, _ := strconv.ParseFloat(reparsed["askQty"].(string), 64)
 		
 		tickers = append(tickers, models.Ticker{
-			coin,
-			cur,
-			symbol,
-			bidPrice,
-			bidQty,
-			askPrice,
-			askQty,
-			"binance",
-			int(time.Now().Unix())})
+			Coin: coin,
+			Currency: cur,
+			Symbol: symbol,
+			BidPrice: bidPrice,
+			BidQty: bidQty,
+			AskPrice: askPrice,
+			AskQty: askQty,
+			Exchange: "binance",
+			Timestamp: int(time.Now().Unix())})
 	}
 	if len(tickers) == 0 {
 		log.Println("Could not get tickers from binance.")

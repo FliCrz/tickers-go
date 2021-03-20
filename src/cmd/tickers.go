@@ -35,7 +35,7 @@ var tickersCmd = &cobra.Command{
 
 		tickers := GetTickersMethod(args)
 
-		if Verbose == true {
+		if Verbose {
 			for _, i := range tickers{
 				for _, o := range i {
 					

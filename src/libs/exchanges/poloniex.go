@@ -1,7 +1,6 @@
 package exchanges
 
 import (
-	"log"
 	"strconv"
 	"strings"
 	"tickers/src/models"
@@ -27,23 +26,19 @@ func GetPoloniexTickers () []models.Ticker {
 	for k, v := range parsed {
 		coin = strings.Split(k, "_")[1]
 		cur = strings.Split(k, "_")[0]
-		bp, err := strconv.ParseFloat(v.(map[string]interface{})["highestBid"].(string), 64)
-		ap, err := strconv.ParseFloat(v.(map[string]interface{})["lowestAsk"].(string), 64)
-
-		if err != nil {
-			log.Println(err)
-		}
+		bp, _ := strconv.ParseFloat(v.(map[string]interface{})["highestBid"].(string), 64)
+		ap, _ := strconv.ParseFloat(v.(map[string]interface{})["lowestAsk"].(string), 64)
 		
 		tickers = append(tickers, models.Ticker{
-			coin,
-			cur,
-			coin+cur,
-			bp,
-			0.0,
-			ap,
-			0.0,
-			"poloniex",
-			int(time.Now().Unix())})
+			Coin: coin,
+			Currency: cur,
+			Symbol: coin + cur,
+			BidPrice: bp,
+			BidQty: 0.0,
+			AskPrice: ap,
+			AskQty: 0.0,
+			Exchange: "poloniex",
+			Timestamp: int(time.Now().Unix())})
 	}
 	return tickers
 }

@@ -1,7 +1,6 @@
 package exchanges
 
 import (
-	"log"
 	"net/url"
 	"strconv"
 	"strings"
@@ -38,25 +37,21 @@ func GetKrakenTickers() []models.Ticker {
 		bidData := d["b"].([]interface{})
 		askData := d["a"].([]interface{})
 
-		bidPrice, err := strconv.ParseFloat(bidData[0].(string), 64)
-		bidQty, err := strconv.ParseFloat(bidData[2].(string), 64)
-		askPrice, err := strconv.ParseFloat(askData[0].(string), 64)
-		askQty, err := strconv.ParseFloat(askData[2].(string), 64)
-
-		if err != nil {
-			log.Fatalln(err)
-		}
+		bidPrice, _ := strconv.ParseFloat(bidData[0].(string), 64)
+		bidQty, _ := strconv.ParseFloat(bidData[2].(string), 64)
+		askPrice, _ := strconv.ParseFloat(askData[0].(string), 64)
+		askQty, _ := strconv.ParseFloat(askData[2].(string), 64)
 
 		tickers = append(tickers, models.Ticker{
-			coin,
-			cur,
-			k,
-			bidPrice,
-			bidQty,
-			askPrice,
-			askQty,
-			"kraken",
-			int(time.Now().Unix())})
+			Coin: coin,
+			Currency: cur,
+			Symbol: k,
+			BidPrice: bidPrice,
+			BidQty: bidQty,
+			AskPrice: askPrice,
+			AskQty: askQty,
+			Exchange: "kraken",
+			Timestamp: int(time.Now().Unix())})
 	}
 
 	return tickers

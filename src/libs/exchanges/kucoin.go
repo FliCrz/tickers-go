@@ -25,18 +25,20 @@ func GetKucoinTickers () []models.Ticker {
 			for m, n := range v.(map[string]interface{}) {
 				if m == "ticker" {
 					for _, i := range n.([]interface{}) {
+						coin := strings.Split(i.(map[string]interface{})["symbol"].(string), "-")[0]
+						cur := strings.Split(i.(map[string]interface{})["symbol"].(string), "-")[1]
 						bidPrice, _ := strconv.ParseFloat(i.(map[string]interface{})["buy"].(string), 64)
 						askPrice, _ := strconv.ParseFloat(i.(map[string]interface{})["sell"].(string), 64)
 						tickers = append(tickers, models.Ticker{
-							strings.Split(i.(map[string]interface{})["symbol"].(string), "-")[0],
-							strings.Split(i.(map[string]interface{})["symbol"].(string), "-")[1],
-							strings.ReplaceAll(i.(map[string]interface{})["symbol"].(string), "-", ""),
-							bidPrice,
-							0.0,
-							askPrice,
-							0.0,
-							"kucoin",
-							int(time.Now().Unix())})
+							Coin: coin,
+							Currency: cur,
+							Symbol: coin + cur,
+							BidPrice: bidPrice,
+							BidQty: 0.0,
+							AskPrice: askPrice,
+							AskQty: 0.0,
+							Exchange: "kucoin",
+							Timestamp: int(time.Now().Unix())})
 					}
 				}
 			}

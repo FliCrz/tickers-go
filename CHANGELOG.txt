@@ -1,4 +1,8 @@
 # v0.1.1
+- better code
+- added hitbtc
+
+# v0.1.1
 - removed unused external libs.
 
 # v0.1.0

@@ -31,15 +31,15 @@ func GetLiquidTickers () []models.Ticker {
 		}
 		
 		tickers = append(tickers, models.Ticker{
-			coin,
-			cur,
-			coin+cur,
-			bp.(float64),
-			0.0,
-			ap.(float64),
-			0.0,
-			"liquid",
-			int(time.Now().Unix())})
+			Coin: coin,
+			Currency: cur,
+			Symbol: coin + cur,
+			BidPrice: bp.(float64),
+			BidQty: 0.0,
+			AskPrice: ap.(float64),
+			AskQty: 0.0,
+			Exchange: "liquid",
+			Timestamp: int(time.Now().Unix())})
 	}
 	return tickers
 }

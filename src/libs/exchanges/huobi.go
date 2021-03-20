@@ -46,15 +46,15 @@ func GetHuobiTickers() []models.Ticker {
 		askQty := reparsed["askSize"].(float64)
 		
 		tickers = append(tickers, models.Ticker{
-			coin,
-			cur,
-			cur + coin,
-			bidPrice,
-			bidQty,
-			askPrice,
-			askQty,
-			"huobi",
-			int(time.Now().Unix())})
+			Coin: coin,
+			Currency: cur,
+			Symbol: cur + coin,
+			BidPrice: bidPrice,
+			BidQty: bidQty,
+			AskPrice: askPrice,
+			AskQty: askQty,
+			Exchange: "huobi",
+			Timestamp: int(time.Now().Unix())})
 	}
 
 	if len(tickers) == 0 {
@@ -70,9 +70,7 @@ func getHuobiRawSymbols() []interface{} {
 	parsed := data.(map[string]interface{})
 	reparsed := parsed["data"].([]interface{})
 	var symbols []interface{}
-	for _, i := range reparsed {
-		symbols = append(symbols, i)
-	}
+	symbols = append(symbols, reparsed...)
 	return symbols
 }
 

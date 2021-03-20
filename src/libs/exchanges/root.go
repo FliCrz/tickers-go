@@ -34,6 +34,6 @@ func makeRequest(url string) interface{} {
 	}
 
 	log.Println("Could not connect to server. Sleeping 10s.")
-	time.Sleep(10)
+	time.Sleep(10 * time.Second)
 	return makeRequest(url)
 }
