@@ -26,8 +26,7 @@ func GetAvailableExchangesMethod () []string {
 		"kucoin",
 		"liquid", 
 		"okex",
-		"poloniex",
-	}
+		"poloniex"}
 
 	return exchanges
 }
