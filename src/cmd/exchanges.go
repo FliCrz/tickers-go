@@ -20,6 +20,7 @@ func GetAvailableExchangesMethod () []string {
 		"bitfinex",
 		"bittrex",
 		"btcpop",
+		"crex24",
 		"hitbtc",
 		"huobi",
 		"kraken",

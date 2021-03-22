@@ -18,13 +18,14 @@ var TickersFuncs = map[string]func() []models.Ticker {
 	"bitfinex": exchanges.GetBitfinexTickers,
 	"bittrex": exchanges.GetBittrexTickers,
 	"btcpop": exchanges.GetBtcPopTickers,
+	"crex24": exchanges.GetCrex24Tickers,
+	"hitbtc": exchanges.GetHitbtcTickers,
 	"huobi": exchanges.GetHuobiTickers,
 	"kraken": exchanges.GetKrakenTickers,
 	"kucoin": exchanges.GetKucoinTickers,
 	"okex": exchanges.GetOkexTickers,
 	"poloniex": exchanges.GetPoloniexTickers,
-	"liquid": exchanges.GetLiquidTickers,
-	"hitbtc": exchanges.GetHitbtcTickers}
+	"liquid": exchanges.GetLiquidTickers}
 
 var rootCmd = &cobra.Command{
 	Use:   "tickers",
