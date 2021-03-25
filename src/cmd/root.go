@@ -7,6 +7,7 @@ import (
 	"tickers/src/exchanges/bitfinex"
 	"tickers/src/exchanges/bittrex"
 	"tickers/src/exchanges/btcpop"
+	"tickers/src/exchanges/coinbasepro"
 	"tickers/src/exchanges/crex24"
 	"tickers/src/exchanges/hitbtc"
 	"tickers/src/exchanges/huobi"
@@ -30,6 +31,7 @@ var TickersFuncs = map[string]func() []models.Ticker {
 	"bittrex": bittrex.GetTickers,
 	"btcpop": btcpop.GetTickers,
 	"crex24": crex24.GetTickers,
+	"coinbasepro": coinbasepro.GetTickers,
 	"hitbtc": hitbtc.GetTickers,
 	"huobi": huobi.GetTickers,
 	"kraken": kraken.GetTickers,

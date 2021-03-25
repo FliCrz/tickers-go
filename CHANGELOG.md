@@ -1,3 +1,6 @@
+# v0.1.5
+- added coinbasepro
+
 # v0.1.4
 - switched exchanges libs to folders for ease maintenance
 - Added function to get exchange url base on coin, cur
