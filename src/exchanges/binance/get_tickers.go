@@ -1,26 +1,25 @@
-package exchanges
+package binance
 
 import (
 	"log"
 	"strconv"
 	"tickers/src/models"
+	"tickers/src/utils"
 	"time"
 )
 
-var binanceAPIURL =  "https://api.binance.com/api/v3"
+// GetTickers ...
+func GetTickers() []models.Ticker {
 
-// GetBinanceTickers ...
-func GetBinanceTickers() []models.Ticker {
-
-	url := binanceAPIURL + "/ticker/bookTicker"
+	url := APIURL + "/ticker/bookTicker"
 	
-	data := makeRequest(url)
+	data := utils.MakeRequest(url)
 
 	var tickers []models.Ticker
 
 	parsed := data.([]interface{})
 
-	symbolsList := getSymbolsData()
+	symbolsList := getSymbols()
 
 	var coin string
 	var cur string
@@ -59,16 +58,4 @@ func GetBinanceTickers() []models.Ticker {
 		log.Println("Could not get tickers from binance.")
 	}
 	return tickers
-}
-
-
-func getSymbolsData() []interface{} {
-	log.Println("Getting symbols from binance")
-
-	url := binanceAPIURL + "/exchangeInfo"
-	data := makeRequest(url)
-	parsed := data.(map[string]interface{})
-	symbolsList := parsed["symbols"].([]interface{})
-
-	return symbolsList
 }

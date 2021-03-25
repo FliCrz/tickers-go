@@ -1,22 +1,23 @@
-package exchanges
+package poloniex
 
 import (
 	"strconv"
 	"strings"
 	"tickers/src/models"
+	"tickers/src/utils"
 	"time"
 )
 
-var poloniexBaseURL = "https://poloniex.com/public"
+var baseURL = "https://poloniex.com/public"
 
-// GetPoloniexTickers ...
-func GetPoloniexTickers () []models.Ticker {
+// GetTickers ...
+func GetTickers () []models.Ticker {
 
 	var tickers []models.Ticker
 
-	url := poloniexBaseURL + "?command=returnTicker"
+	url := baseURL + "?command=returnTicker"
 
-	data := makeRequest(url)
+	data := utils.MakeRequest(url)
 
 	parsed := data.(map[string]interface{})
 

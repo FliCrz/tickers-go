@@ -1,26 +1,26 @@
-package exchanges
+package huobi
 
 import (
 	"log"
 	"strings"
 	"tickers/src/models"
+	"tickers/src/utils"
 	"time"
 )
 
-// GetHuobiTickers ...
-func GetHuobiTickers() []models.Ticker {
+// GetTickers ...
+func GetTickers() []models.Ticker {
 
 	url := "https://api.huobi.pro/market/tickers"
 	
-	data := makeRequest(url)
+	data := utils.MakeRequest(url)
 
-	
 	var tickers []models.Ticker
 	
 	parsed := data.(map[string]interface{})
 	parsedData := parsed["data"].([]interface{})
 
-	symbolsList := getHuobiRawSymbols()
+	symbolsList := getSymbols()
 	
 	for _, i := range parsedData {
 		var coin string
@@ -63,14 +63,3 @@ func GetHuobiTickers() []models.Ticker {
 
 	return tickers
 }
-
-func getHuobiRawSymbols() []interface{} {
-	url := "https://api.huobi.pro/v1/common/symbols"
-	data := makeRequest(url)
-	parsed := data.(map[string]interface{})
-	reparsed := parsed["data"].([]interface{})
-	var symbols []interface{}
-	symbols = append(symbols, reparsed...)
-	return symbols
-}
-

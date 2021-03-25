@@ -1,15 +1,16 @@
-package exchanges
+package kraken
 
 import (
 	"net/url"
 	"strconv"
 	"strings"
 	"tickers/src/models"
+	"tickers/src/utils"
 	"time"
 )
 
-// GetKrakenTickers ...
-func GetKrakenTickers() []models.Ticker {
+// GetTickers ...
+func GetTickers() []models.Ticker {
 	
 	var tickers []models.Ticker
 
@@ -21,7 +22,7 @@ func GetKrakenTickers() []models.Ticker {
 	}
 	symbolsRequest.Add("pair", s[:len(s) - 1])
 	url := "https://api.kraken.com/0/public/Ticker?" + symbolsRequest.Encode()
-	data := makeRequest(url)
+	data := utils.MakeRequest(url)
 	parsed := data.(map[string]interface{})["result"]
 	// log.Println(parsed)
 	for k, v := range parsed.(map[string]interface{}) {
@@ -55,21 +56,4 @@ func GetKrakenTickers() []models.Ticker {
 	}
 
 	return tickers
-}
-
-
-func getKrakenRawSymbols () []interface{} {
-
-	var symbols []interface{}
-	url := "https://api.kraken.com/0/public/AssetPairs"
-	data := makeRequest(url)
-	parsed := data.(map[string]interface{})["result"]
-
-	for k, v := range parsed.(map[string]interface{}) {
-		pair :=  v.(map[string]interface{})["base"].(string) + "-" + v.(map[string]interface{})["quote"].(string)
-		var pairData []interface{}
-		pairData = append(pairData, k, pair)
-		symbols = append(symbols, pairData)
-	} 
-	return symbols
 }

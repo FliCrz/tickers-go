@@ -1,22 +1,23 @@
-package exchanges
+package kucoin
 
 import (
 	"strconv"
 	"strings"
 	"tickers/src/models"
+	"tickers/src/utils"
 	"time"
 )
 
-var kucoinBaseURL = "https://api.kucoin.com"
+var baseURL = "https://api.kucoin.com"
 
-// GetKucoinTickers ...
-func GetKucoinTickers () []models.Ticker {
+// GetTickers ...
+func GetTickers () []models.Ticker {
 
 	var tickers []models.Ticker
 
-	url := kucoinBaseURL + "/api/v1/market/allTickers"
+	url := baseURL + "/api/v1/market/allTickers"
 
-	data := makeRequest(url)
+	data := utils.MakeRequest(url)
 
 	parsed := data.(map[string]interface{})
 	

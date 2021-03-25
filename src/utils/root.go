@@ -1,4 +1,4 @@
-package exchanges
+package utils
 
 import (
 	"encoding/json"
@@ -8,7 +8,8 @@ import (
 	"time"
 )
 
-func makeRequest(url string) interface{} {
+// MakeRequest function to make request and return a json result.
+func MakeRequest(url string) interface{} {
 	
 	resp, err := http.Get(url)
 	
@@ -35,5 +36,5 @@ func makeRequest(url string) interface{} {
 
 	log.Println("Could not connect to server. Sleeping 10s.")
 	time.Sleep(10 * time.Second)
-	return makeRequest(url)
+	return MakeRequest(url)
 }

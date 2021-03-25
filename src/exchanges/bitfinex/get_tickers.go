@@ -1,21 +1,22 @@
-package exchanges
+package bitfinex
 
 import (
 	"log"
 	"strings"
 	"tickers/src/models"
+	"tickers/src/utils"
 	"time"
 )
 
-var bitfinexAPIURL = "https://api-pub.bitfinex.com/v2"
+var APIURL = "https://api-pub.bitfinex.com/v2"
 
 
-// GetBitfinexTickers ...
-func GetBitfinexTickers() []models.Ticker {
+// GetTickers ...
+func GetTickers() []models.Ticker {
 
-	url := bitfinexAPIURL + "/tickers?symbols=ALL"
+	url := APIURL + "/tickers?symbols=ALL"
 	
-	data := makeRequest(url)
+	data := utils.MakeRequest(url)
 	
 	var tickers []models.Ticker
 	
@@ -75,23 +76,4 @@ func GetBitfinexTickers() []models.Ticker {
 	}
 
 	return tickers
-}
-
-
-func getBitfinexRawSymbols () []interface{} {
-
-	log.Println("Getting symbols data from bitfinex.")
-
-	url := bitfinexAPIURL + "/conf/pub:map:currency:sym"
-
-	data := makeRequest(url)
-
-	var symbols []interface{}
-	// log.Println(data)
-	parsed := data.([]interface{})
-	for _, i := range parsed {
-		symbols = append(symbols, i.([]interface{}))
-	}
-
-	return symbols
 }

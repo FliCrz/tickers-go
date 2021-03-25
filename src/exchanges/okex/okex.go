@@ -1,22 +1,23 @@
-package exchanges
+package okex
 
 import (
 	"strconv"
 	"strings"
 	"tickers/src/models"
+	"tickers/src/utils"
 	"time"
 )
 
-var okexBaseURL = "https://www.okex.com"
+var baseURL = "https://www.okex.com"
 
-// GetOkexTickers ...
-func GetOkexTickers () []models.Ticker {
+// GetTickers ...
+func GetTickers () []models.Ticker {
 	
 	var tickers []models.Ticker
 
-	url := okexBaseURL + "/api/spot/v3/instruments/ticker"
+	url := baseURL + "/api/spot/v3/instruments/ticker"
 
-	data := makeRequest(url)
+	data := utils.MakeRequest(url)
 
 	parsed := data.([]interface{})
 

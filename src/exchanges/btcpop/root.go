@@ -1,18 +1,19 @@
-package exchanges
+package btcpop
 
 import (
 	"log"
 	"strconv"
 	"tickers/src/models"
+	"tickers/src/utils"
 	"time"
 )
 
-// GetBtcPopTickers ...
-func GetBtcPopTickers() []models.Ticker {
+// GetTickers ...
+func GetTickers() []models.Ticker {
 
 	url := "https://btcpop.co/api/market-public.php"
 	
-	data := makeRequest(url)
+	data := utils.MakeRequest(url)
 
 	var tickers []models.Ticker
 	

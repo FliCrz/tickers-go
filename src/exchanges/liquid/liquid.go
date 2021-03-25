@@ -1,20 +1,21 @@
-package exchanges
+package liquid
 
 import (
 	"tickers/src/models"
+	"tickers/src/utils"
 	"time"
 )
 
-var liquidBaseURL = "https://api.liquid.com"
+var baseURL = "https://api.liquid.com"
 
-// GetLiquidTickers ...
-func GetLiquidTickers () []models.Ticker {
+// GetTickers ...
+func GetTickers () []models.Ticker {
 
 	var tickers []models.Ticker
 
-	url := liquidBaseURL + "/products"
+	url := baseURL + "/products"
 
-	data := makeRequest(url)
+	data := utils.MakeRequest(url)
 
 	parsed := data.([]interface{})
 

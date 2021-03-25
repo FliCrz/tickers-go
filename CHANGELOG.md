@@ -1,3 +1,8 @@
+# v0.1.4
+- switched exchanges libs to folders for ease maintenance
+- Added function to get exchange url base on coin, cur
+- changed current file (CHANGELOG) filetype from .txt to .md
+
 # v0.1.3
 - added crex24
 

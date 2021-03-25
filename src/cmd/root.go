@@ -3,7 +3,18 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"tickers/src/libs/exchanges"
+	"tickers/src/exchanges/binance"
+	"tickers/src/exchanges/bitfinex"
+	"tickers/src/exchanges/bittrex"
+	"tickers/src/exchanges/btcpop"
+	"tickers/src/exchanges/crex24"
+	"tickers/src/exchanges/hitbtc"
+	"tickers/src/exchanges/huobi"
+	"tickers/src/exchanges/kraken"
+	"tickers/src/exchanges/kucoin"
+	"tickers/src/exchanges/liquid"
+	"tickers/src/exchanges/okex"
+	"tickers/src/exchanges/poloniex"
 	"tickers/src/models"
 
 	"github.com/spf13/cobra"
@@ -14,18 +25,33 @@ var Verbose bool
 
 // TickersFuncs ...
 var TickersFuncs = map[string]func() []models.Ticker {
-	"binance": exchanges.GetBinanceTickers,
-	"bitfinex": exchanges.GetBitfinexTickers,
-	"bittrex": exchanges.GetBittrexTickers,
-	"btcpop": exchanges.GetBtcPopTickers,
-	"crex24": exchanges.GetCrex24Tickers,
-	"hitbtc": exchanges.GetHitbtcTickers,
-	"huobi": exchanges.GetHuobiTickers,
-	"kraken": exchanges.GetKrakenTickers,
-	"kucoin": exchanges.GetKucoinTickers,
-	"okex": exchanges.GetOkexTickers,
-	"poloniex": exchanges.GetPoloniexTickers,
-	"liquid": exchanges.GetLiquidTickers}
+	"binance": binance.GetTickers,
+	"bitfinex": bitfinex.GetTickers,
+	"bittrex": bittrex.GetTickers,
+	"btcpop": btcpop.GetTickers,
+	"crex24": crex24.GetTickers,
+	"hitbtc": hitbtc.GetTickers,
+	"huobi": huobi.GetTickers,
+	"kraken": kraken.GetTickers,
+	"kucoin": kucoin.GetTickers,
+	"okex": okex.GetTickers,
+	"poloniex": poloniex.GetTickers,
+	"liquid": liquid.GetTickers}
+
+// UrlFuncs ...
+var UrlFuncs = map[string]func(string, string) string {
+	"binance": binance.GenerateTradeUrl,
+	"bitfinex": bitfinex.GenerateTradeUrl,
+	"bittrex": bittrex.GenerateTradeUrl,
+	"btcpop": btcpop.GenerateTradeUrl,
+	"crex24": crex24.GenerateTradeUrl,
+	"hitbtc": hitbtc.GenerateTradeUrl,
+	"huobi": huobi.GenerateTradeUrl,
+	"kraken": kraken.GenerateTradeUrl,
+	"kucoin": kucoin.GenerateTradeUrl,
+	"okex": okex.GenerateTradeUrl,
+	"poloniex": poloniex.GenerateTradeUrl,
+	"liquid": liquid.GenerateTradeUrl}
 
 var rootCmd = &cobra.Command{
 	Use:   "tickers",
@@ -40,6 +66,7 @@ func init() {
 	rootCmd.AddCommand(listExchangesCmd)
 	rootCmd.AddCommand(tickersCmd)
 	rootCmd.AddCommand(listCommonSymbolsCmd)
+	rootCmd.AddCommand(getTradeURLCmd)
 }
 
 // Execute ...

@@ -1,19 +1,20 @@
-package exchanges
+package bittrex
 
 import (
 	"log"
 	"strconv"
 	"strings"
 	"tickers/src/models"
+	"tickers/src/utils"
 	"time"
 )
 
-// GetBittrexTickers ...
-func GetBittrexTickers() []models.Ticker {
+// GetTickers ...
+func GetTickers() []models.Ticker {
 
 	url := "https://api.bittrex.com/v3/markets/tickers"
 	
-	data := makeRequest(url)
+	data := utils.MakeRequest(url)
 
 	var tickers []models.Ticker
 
