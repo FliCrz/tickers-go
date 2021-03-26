@@ -18,10 +18,11 @@ func GetAvailableExchangesMethod () []string {
 	exchanges := []string {
 		"binance",
 		"bitfinex",
+		"bitstamp",
 		"bittrex",
 		"btcpop",
 		"crex24",
-		"coinbasepro*",
+		"coinbasepro",
 		"hitbtc",
 		"huobi",
 		"kraken",

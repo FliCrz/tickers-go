@@ -26,3 +26,21 @@ To build depending of the OS.
 `make build-linux`        for linux build. <br>
 `make build-mac`          for mac build. <br>
 `make build-win`          for windows build.
+
+## Supported exchanges
+```
+"binance",
+"bitfinex",
+"bitstamp",
+"bittrex",
+"btcpop",
+"crex24",
+"coinbasepro*",
+"hitbtc",
+"huobi",
+"kraken",
+"kucoin",
+"liquid", 
+"okex",
+"poloniex"
+```

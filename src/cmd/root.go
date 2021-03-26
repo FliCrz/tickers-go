@@ -5,6 +5,7 @@ import (
 	"os"
 	"tickers/src/exchanges/binance"
 	"tickers/src/exchanges/bitfinex"
+	"tickers/src/exchanges/bitstamp"
 	"tickers/src/exchanges/bittrex"
 	"tickers/src/exchanges/btcpop"
 	"tickers/src/exchanges/coinbasepro"
@@ -28,6 +29,7 @@ var Verbose bool
 var TickersFuncs = map[string]func() []models.Ticker {
 	"binance": binance.GetTickers,
 	"bitfinex": bitfinex.GetTickers,
+	"bitstamp": bitstamp.GetTickers,
 	"bittrex": bittrex.GetTickers,
 	"btcpop": btcpop.GetTickers,
 	"crex24": crex24.GetTickers,
@@ -44,9 +46,11 @@ var TickersFuncs = map[string]func() []models.Ticker {
 var UrlFuncs = map[string]func(string, string) string {
 	"binance": binance.GenerateTradeUrl,
 	"bitfinex": bitfinex.GenerateTradeUrl,
+	"bitstamp": bitstamp.GenerateTradeUrl,
 	"bittrex": bittrex.GenerateTradeUrl,
 	"btcpop": btcpop.GenerateTradeUrl,
 	"crex24": crex24.GenerateTradeUrl,
+	"coinbasepro": coinbasepro.GenerateTradeUrl,
 	"hitbtc": hitbtc.GenerateTradeUrl,
 	"huobi": huobi.GenerateTradeUrl,
 	"kraken": kraken.GenerateTradeUrl,

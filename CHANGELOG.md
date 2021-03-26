@@ -1,3 +1,6 @@
+# v0.1.6
+- added bitstamp
+
 # v0.1.5
 - added coinbasepro
 
