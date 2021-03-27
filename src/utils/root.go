@@ -31,10 +31,12 @@ func MakeRequest(url string) interface{} {
 	
 		json.Unmarshal(body, &data)
 	
+		// log.Println(data)
 		return data
-	}
+	} else {
 
-	log.Println("Could not connect to server. Sleeping 2s.")
-	time.Sleep(2 * time.Second)
-	return MakeRequest(url)
+		log.Println("Could not connect to server. Sleeping 2s.")
+		time.Sleep(2 * time.Second)
+		return MakeRequest(url)
+	}
 }

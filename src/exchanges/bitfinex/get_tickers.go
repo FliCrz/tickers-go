@@ -30,23 +30,26 @@ func GetTickers() []models.Ticker {
 
 		symbol := reparsed[0].(string)
 
-		if strings.Index(symbol, "t") == 0 && strings.Contains(symbol, ":") && strings.Contains(symbol, "-") {
-
+		if strings.Index(symbol, "t") == 0 && strings.Contains(symbol, ":") {
+			
 			symbol = symbol[1:]
-			rawCoin := symbol[:len(symbol) / 2]
-			rawCur := symbol[len(symbol) / 2:]
-
+			rawCoin := strings.Split(symbol, ":")[0]
+			rawCur := strings.Split(symbol, ":")[1]
+			
 			var coin string
 			var cur string
-
+			
+			
 			for _, s := range symbolsList {
-				i := s.([]interface{})[0].(string)
-				j := s.([]interface{})[1].(string)
+				i := s.([]interface{})[0]
+				j := s.([]interface{})[1]
+				
+				// log.Println(i, j)
 
 				if rawCoin == i {
-					coin = strings.ToUpper(j)
+					coin = strings.ToUpper(j.(string))
 				} else if rawCur == i {
-					cur = strings.ToUpper(j)
+					cur = strings.ToUpper(j.(string))
 				} else {
 					cur = rawCur
 					coin = rawCoin

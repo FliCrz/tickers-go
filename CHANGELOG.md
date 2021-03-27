@@ -1,3 +1,6 @@
+# v0.1.7
+- fixed bitfinex
+
 # v0.1.6
 - added bitstamp
 
