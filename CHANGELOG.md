@@ -1,3 +1,6 @@
+# v0.1.8
+- added stakecube
+
 # v0.1.7
 - fixed bitfinex
 

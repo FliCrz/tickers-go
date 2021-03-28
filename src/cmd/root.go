@@ -17,6 +17,7 @@ import (
 	"tickers/src/exchanges/liquid"
 	"tickers/src/exchanges/okex"
 	"tickers/src/exchanges/poloniex"
+	"tickers/src/exchanges/stakecube"
 	"tickers/src/models"
 
 	"github.com/spf13/cobra"
@@ -38,9 +39,11 @@ var TickersFuncs = map[string]func() []models.Ticker {
 	"huobi": huobi.GetTickers,
 	"kraken": kraken.GetTickers,
 	"kucoin": kucoin.GetTickers,
+	"liquid": liquid.GetTickers,
 	"okex": okex.GetTickers,
 	"poloniex": poloniex.GetTickers,
-	"liquid": liquid.GetTickers}
+	"stakecube": stakecube.GetTickers,
+}
 
 // UrlFuncs ...
 var UrlFuncs = map[string]func(string, string) string {
@@ -55,9 +58,11 @@ var UrlFuncs = map[string]func(string, string) string {
 	"huobi": huobi.GenerateTradeUrl,
 	"kraken": kraken.GenerateTradeUrl,
 	"kucoin": kucoin.GenerateTradeUrl,
+	"liquid": liquid.GenerateTradeUrl,
 	"okex": okex.GenerateTradeUrl,
 	"poloniex": poloniex.GenerateTradeUrl,
-	"liquid": liquid.GenerateTradeUrl}
+	"stakecube": stakecube.GenerateTradeUrl,
+}
 
 var rootCmd = &cobra.Command{
 	Use:   "tickers",

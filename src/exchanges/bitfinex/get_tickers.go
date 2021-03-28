@@ -1,7 +1,6 @@
 package bitfinex
 
 import (
-	"log"
 	"strings"
 	"tickers/src/models"
 	"tickers/src/utils"
@@ -72,10 +71,6 @@ func GetTickers() []models.Ticker {
 				Exchange: "bitfinex",
 				Timestamp: int(time.Now().Unix())})
 		}
-	}
-
-	if len(tickers) == 0 {
-		log.Println("Could not get tickers from bitfinex.")
 	}
 
 	return tickers
