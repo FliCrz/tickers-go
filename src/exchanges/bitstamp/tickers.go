@@ -16,7 +16,7 @@ func GetTickers () (tickers []models.Ticker) {
 	
 	for _, s := range symbols {
 		
-		url := "https://www.bitstamp.net/api/ticker/" + s
+		url := "https://www.bitstamp.net/api/v2/ticker/" + s
 		data := utils.MakeRequest(url)
 		parsed := data.(map[string]interface{})
 		
@@ -32,6 +32,7 @@ func GetTickers () (tickers []models.Ticker) {
 			}
 		}
 		
+		// log.Println(s, data)
 		bid, _ := strconv.ParseFloat(parsed["bid"].(string), 64)
 		ask, _ := strconv.ParseFloat(parsed["ask"].(string), 64)
 
