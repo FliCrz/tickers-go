@@ -1,6 +1,7 @@
 package stakecube
 
 import (
+	"strconv"
 	"strings"
 	"tickers/src/models"
 	"tickers/src/utils"
@@ -20,6 +21,8 @@ func GetTickers () (tickers []models.Ticker) {
 
 		data := utils.MakeRequest(url)
 
+		// log.Println(data)
+
 		parsed := data.(map[string]interface{})["result"]
 
 		reparsed := parsed.(map[string]interface{})
@@ -31,21 +34,31 @@ func GetTickers () (tickers []models.Ticker) {
 
 			d := v.(map[string]interface{})
 
+			bid, ok := d["bestBid"].(float64)
+			if !ok {
+				bid, _ = strconv.ParseFloat(d["bestBid"].(string), 64)
+			}
+			ask, ok := d["bestAsk"].(float64)
+			if !ok {
+				ask, _ = strconv.ParseFloat(d["bestAsk"].(string), 64)
+			}
+
 			new_ticker := models.Ticker {
 				Coin: coin,
 				Currency: cur,
 				Symbol: coin + cur,
-				BidPrice: d["bestBid"].(float64),
+				BidPrice: bid,
 				BidQty: 0.0,
-				AskPrice: d["bestAsk"].(float64),
+				AskPrice: ask,
 				AskQty: 0.0,
 				Exchange: "stakecube",
 				Timestamp: int(time.Now().Unix()),
 			}
-
+			
+			// log.Println(new_ticker)
 			tickers = append(tickers, new_ticker)
 		}
 	}
-
+	
 	return tickers
 }

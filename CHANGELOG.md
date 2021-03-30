@@ -1,4 +1,5 @@
 # v0.1.10
+- fixed stakecube
 
 # v0.1.9
 - added zbg
