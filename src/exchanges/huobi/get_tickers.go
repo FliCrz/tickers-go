@@ -53,6 +53,8 @@ func GetTickers() []models.Ticker {
 			BidQty: bidQty,
 			AskPrice: askPrice,
 			AskQty: askQty,
+			BaseVolume: reparsed["amount"].(float64),
+			QuoteVolume: reparsed["vol"].(float64),
 			Exchange: "huobi",
 			Timestamp: int(time.Now().Unix())})
 	}

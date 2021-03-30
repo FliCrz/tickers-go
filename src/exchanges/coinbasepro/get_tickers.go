@@ -24,11 +24,14 @@ func GetTickers() []models.Ticker {
 		asks := parsed["asks"].([]interface{})[0].([]interface{})
 		
 		// log.Println(bids, asks)
-
+		
 		bidPrice, _ := strconv.ParseFloat(bids[0].(string), 64)
 		bidQty, _ := strconv.ParseFloat(bids[1].(string), 64)
 		askPrice, _ := strconv.ParseFloat(asks[0].(string), 64)
 		askQty, _ := strconv.ParseFloat(asks[1].(string), 64)
+
+		// TODO check how to get volume
+
 		new_ticker := models.Ticker{
 			Coin: strings.Split(s, "-")[0],
 			Currency: strings.Split(s, "-")[1],
@@ -37,6 +40,8 @@ func GetTickers() []models.Ticker {
 			BidQty: bidQty,
 			AskPrice: askPrice,
 			AskQty: askQty,
+			BaseVolume: 0.0,
+			QuoteVolume: 0.0,
 			Exchange: "coinbasepro",
 			Timestamp: int(time.Now().Unix())}
 		

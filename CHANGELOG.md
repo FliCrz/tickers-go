@@ -1,5 +1,3 @@
-# v0.1.10
-
 # v0.1.9
 - added zbg
 - added bequant - missing get_trade_url

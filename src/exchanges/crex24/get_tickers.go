@@ -1,20 +1,19 @@
-package hitbtc
+package crex24
 
 import (
 	"log"
-	"strconv"
 	"strings"
 	"tickers/src/models"
 	"tickers/src/utils"
 	"time"
 )
 
-var APIURL =  "https://api.hitbtc.com/api/2"
+var APIUrl =  "https://api.crex24.com/v2"
 
 // GetTickers ...
 func GetTickers() []models.Ticker {
 
-	url := APIURL + "/public/ticker"
+	url := APIUrl + "/public/tickers"
 	
 	data := utils.MakeRequest(url)
 
@@ -28,9 +27,9 @@ func GetTickers() []models.Ticker {
 
 		// log.Println(reparsed)
 
-		symbol := reparsed["symbol"].(string)
-		coin := strings.SplitN(reparsed["symbol"].(string), "", 2)[0]
-		cur := strings.SplitN(reparsed["symbol"].(string), "", 2)[1]
+		symbol := strings.Replace(reparsed["instrument"].(string), "-", "", -1)
+		coin := strings.SplitN(reparsed["instrument"].(string), "-", 2)[0]
+		cur := strings.SplitN(reparsed["instrument"].(string), "-", 2)[1]
 		
 		var bidPrice float64
 		var askPrice float64
@@ -38,13 +37,13 @@ func GetTickers() []models.Ticker {
 		if reparsed["bid"] == nil {
 			bidPrice = 0.0
 		} else {
-			bidPrice, _ = strconv.ParseFloat(reparsed["bid"].(string), 64)
+			bidPrice = reparsed["bid"].(float64)
 		}
 
 		if reparsed["ask"] == nil {
 			askPrice = 0.0
 		} else {
-			askPrice, _ = strconv.ParseFloat(reparsed["ask"].(string), 64)
+			askPrice = reparsed["ask"].(float64)
 		}
 		
 		tickers = append(tickers, models.Ticker{
@@ -55,11 +54,13 @@ func GetTickers() []models.Ticker {
 			BidQty: 0.0,
 			AskPrice: askPrice,
 			AskQty: 0.0,
-			Exchange: "hitbtc",
+			BaseVolume: reparsed["baseVolume"].(float64),
+			QuoteVolume: reparsed["quoteVolume"].(float64),
+			Exchange: "crex24",
 			Timestamp: int(time.Now().Unix())})
 	}
 	if len(tickers) == 0 {
-		log.Println("Could not get tickers from hitbtc.")
+		log.Println("Could not get tickers from crex24.")
 	}
 	return tickers
 }

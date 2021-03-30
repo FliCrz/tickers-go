@@ -30,6 +30,9 @@ func GetTickers () (tickers []models.Ticker) {
 		if coin != "" {
 			bid, _ := strconv.ParseFloat(d[7].(string), 64)
 			ask, _ := strconv.ParseFloat(d[8].(string), 64)
+
+			baseVol, _ := strconv.ParseFloat(d[4].(string), 64)
+			quoteVol, _ := strconv.ParseFloat(d[9].(string), 64)
 			
 			t := models.Ticker{
 				Coin: coin,
@@ -39,6 +42,8 @@ func GetTickers () (tickers []models.Ticker) {
 				BidQty: 0.0,
 				AskPrice: ask,
 				AskQty: 0.0,
+				BaseVolume: baseVol,
+				QuoteVolume: quoteVol,
 				Exchange: "zbg",
 				Timestamp: int(time.Now().Unix()),
 			}

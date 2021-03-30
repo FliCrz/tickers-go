@@ -36,6 +36,8 @@ func GetTickers() []models.Ticker {
 				BidQty: 0.0,
 				AskPrice: askPrice,
 				AskQty: 0.0,
+				BaseVolume: 0.0,
+				QuoteVolume: 0.0,
 				Exchange: "btcpop",
 				Timestamp: int(time.Now().Unix())})
 		}
