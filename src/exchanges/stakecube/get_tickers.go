@@ -34,13 +34,24 @@ func GetTickers () (tickers []models.Ticker) {
 
 			d := v.(map[string]interface{})
 
+			baseVol, ok := d["volumeBase24h"].(float64)
+			 if !ok {
+				 baseVol, _ = strconv.ParseFloat(d["volumeBase24h"].(string), 64)
+			 }
+			 
+			quoteVol, ok := d["volumeTrade24h"].(float64)
+			if !ok {
+				quoteVol, _ = strconv.ParseFloat(d["volumeTrade24h"].(string), 64)
+			}
+
 			bid, ok := d["bestBid"].(float64)
 			if !ok {
-				bid, _ = strconv.ParseFloat(d["bestBid"].(string), 64)
+				quoteVol, _ = strconv.ParseFloat(d["bestBid"].(string), 64)
 			}
+
 			ask, ok := d["bestAsk"].(float64)
 			if !ok {
-				ask, _ = strconv.ParseFloat(d["bestAsk"].(string), 64)
+				quoteVol, _ = strconv.ParseFloat(d["bestAsk"].(string), 64)
 			}
 
 			new_ticker := models.Ticker {
@@ -51,6 +62,8 @@ func GetTickers () (tickers []models.Ticker) {
 				BidQty: 0.0,
 				AskPrice: ask,
 				AskQty: 0.0,
+				BaseVolume: baseVol,
+				QuoteVolume: quoteVol,
 				Exchange: "stakecube",
 				Timestamp: int(time.Now().Unix()),
 			}

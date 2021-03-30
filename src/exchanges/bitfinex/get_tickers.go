@@ -59,6 +59,8 @@ func GetTickers() []models.Ticker {
 			bidQty := reparsed[2].(float64)
 			askPrice := reparsed[3].(float64)
 			askQty := reparsed[4].(float64)
+			baseVol := reparsed[8].(float64)
+			quoteVol := 0.0
 		
 			tickers = append(tickers, models.Ticker{
 				Coin: coin,
@@ -68,6 +70,8 @@ func GetTickers() []models.Ticker {
 				BidQty: bidQty,
 				AskPrice: askPrice,
 				AskQty: askQty,
+				BaseVolume: baseVol,
+				QuoteVolume: quoteVol,
 				Exchange: "bitfinex",
 				Timestamp: int(time.Now().Unix())})
 		}

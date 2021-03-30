@@ -32,6 +32,16 @@ func GetTickers () []models.Ticker {
 		bps, _ := strconv.ParseFloat(d["best_bid_size"].(string), 64)
 		ap, _ := strconv.ParseFloat(d["best_ask"].(string), 64)
 		aps, _ := strconv.ParseFloat(d["best_ask_size"].(string), 64)
+		
+		baseVol := d["base_volume_24"]
+		if baseVol != nil {
+			baseVol, _ = strconv.ParseFloat(baseVol.(string), 64)
+		} else {baseVol = 0.0}
+
+		quoteVol := d["quote_volume_24h"]
+		if quoteVol != nil {
+			quoteVol, _ = strconv.ParseFloat(quoteVol.(string), 64)
+		} else { quoteVol = 0.0}
 
 		tickers = append(tickers, models.Ticker{
 			Coin: coin,
@@ -41,6 +51,8 @@ func GetTickers () []models.Ticker {
 			BidQty: bps,
 			AskPrice: ap,
 			AskQty: aps,
+			BaseVolume: baseVol.(float64),
+			QuoteVolume: quoteVol.(float64),
 			Exchange: "okex",
 			Timestamp: int(time.Now().Unix())})
 	}

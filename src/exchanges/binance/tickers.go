@@ -24,6 +24,8 @@ func GetTickers() []models.Ticker {
 	var coin string
 	var cur string
 
+	volumeData := get24HData()
+
 	for _, i := range parsed {
 
 		reparsed := i.(map[string]interface{})
@@ -51,6 +53,8 @@ func GetTickers() []models.Ticker {
 			BidQty: bidQty,
 			AskPrice: askPrice,
 			AskQty: askQty,
+			BaseVolume: volumeData[symbol][0],
+			QuoteVolume: volumeData[symbol][1],
 			Exchange: "binance",
 			Timestamp: int(time.Now().Unix())})
 	}

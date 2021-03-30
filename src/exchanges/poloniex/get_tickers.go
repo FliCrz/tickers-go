@@ -29,6 +29,8 @@ func GetTickers () []models.Ticker {
 		cur = strings.Split(k, "_")[0]
 		bp, _ := strconv.ParseFloat(v.(map[string]interface{})["highestBid"].(string), 64)
 		ap, _ := strconv.ParseFloat(v.(map[string]interface{})["lowestAsk"].(string), 64)
+		baseVol, _ := strconv.ParseFloat(v.(map[string]interface{})["baseVolume"].(string), 64)
+		quoteVol, _ := strconv.ParseFloat(v.(map[string]interface{})["quoteVolume"].(string), 64)
 		
 		tickers = append(tickers, models.Ticker{
 			Coin: coin,
@@ -38,6 +40,8 @@ func GetTickers () []models.Ticker {
 			BidQty: 0.0,
 			AskPrice: ap,
 			AskQty: 0.0,
+			BaseVolume: baseVol,
+			QuoteVolume: quoteVol,
 			Exchange: "poloniex",
 			Timestamp: int(time.Now().Unix())})
 	}
