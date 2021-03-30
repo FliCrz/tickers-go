@@ -1,3 +1,6 @@
+# v0.1.11
+- added volume for all exchanges
+
 # v0.1.10
 - fixed stakecube
 
