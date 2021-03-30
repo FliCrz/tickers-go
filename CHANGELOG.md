@@ -1,3 +1,7 @@
+# v0.1.9
+- added zbg
+- added bequant - missing get_trade_url
+
 # v0.1.8
 - added stakecube
 

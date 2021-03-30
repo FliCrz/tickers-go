@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"tickers/src/exchanges/bequant"
 	"tickers/src/exchanges/binance"
 	"tickers/src/exchanges/bitfinex"
 	"tickers/src/exchanges/bitstamp"
@@ -18,6 +19,7 @@ import (
 	"tickers/src/exchanges/okex"
 	"tickers/src/exchanges/poloniex"
 	"tickers/src/exchanges/stakecube"
+	"tickers/src/exchanges/zbg"
 	"tickers/src/models"
 
 	"github.com/spf13/cobra"
@@ -28,6 +30,7 @@ var Verbose bool
 
 // TickersFuncs ...
 var TickersFuncs = map[string]func() []models.Ticker {
+	"bequant": bequant.GetTickers,
 	"binance": binance.GetTickers,
 	"bitfinex": bitfinex.GetTickers,
 	"bitstamp": bitstamp.GetTickers,
@@ -43,6 +46,7 @@ var TickersFuncs = map[string]func() []models.Ticker {
 	"okex": okex.GetTickers,
 	"poloniex": poloniex.GetTickers,
 	"stakecube": stakecube.GetTickers,
+	"zbg": zbg.GetTickers,
 }
 
 // UrlFuncs ...

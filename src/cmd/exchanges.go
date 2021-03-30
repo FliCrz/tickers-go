@@ -16,6 +16,7 @@ func GetAvailableExchangesMethod () []string {
 	}
 
 	exchanges := []string {
+		"bequant",
 		"binance",
 		"bitfinex",
 		"bitstamp",
@@ -30,7 +31,9 @@ func GetAvailableExchangesMethod () []string {
 		"liquid", 
 		"okex",
 		"poloniex",
-		"stakecube"}
+		"stakecube",
+		"zbg",
+	}
 
 	return exchanges
 }
