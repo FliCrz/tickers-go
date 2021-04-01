@@ -1,3 +1,6 @@
+# v0.1.12
+- added common_matrix mthod
+
 # v0.1.11
 - added volume for all exchanges
 

@@ -65,7 +65,7 @@ func GetTickers() []models.Ticker {
 			tickers = append(tickers, models.Ticker{
 				Coin: coin,
 				Currency: cur,
-				Symbol: symbol,
+				Symbol: coin + cur,
 				BidPrice: bidPrice,
 				BidQty: bidQty,
 				AskPrice: askPrice,

@@ -32,27 +32,30 @@ func GetTickers () (tickers []models.Ticker) {
 			}
 		}
 		
-		// log.Println(s, data)
-		bid, _ := strconv.ParseFloat(parsed["bid"].(string), 64)
-		ask, _ := strconv.ParseFloat(parsed["ask"].(string), 64)
-		volume, _ := strconv.ParseFloat(parsed["volume"].(string), 64)
-
-		newTicker := models.Ticker{
-			Coin: coin,
-			Currency: cur,
-			Symbol: coin + cur,
-			BidPrice: bid,
-			BidQty: 0.0,
-			AskPrice: ask,
-			AskQty: 0.0,
-			BaseVolume: volume,
-			QuoteVolume: 0.0,
-			Exchange: "bitstamp",
-			Timestamp: int(time.Now().Unix()),
+		if coin != "" && cur != "" {
+			// log.Println(s, data)
+			bid, _ := strconv.ParseFloat(parsed["bid"].(string), 64)
+			ask, _ := strconv.ParseFloat(parsed["ask"].(string), 64)
+			volume, _ := strconv.ParseFloat(parsed["volume"].(string), 64)
+	
+			newTicker := models.Ticker{
+				Coin: coin,
+				Currency: cur,
+				Symbol: coin + cur,
+				BidPrice: bid,
+				BidQty: 0.0,
+				AskPrice: ask,
+				AskQty: 0.0,
+				BaseVolume: volume,
+				QuoteVolume: 0.0,
+				Exchange: "bitstamp",
+				Timestamp: int(time.Now().Unix()),
+			}
+	
+			tickers = append(tickers, newTicker)
+			time.Sleep((1/700)* time.Second)
+			return tickers
 		}
-
-		tickers = append(tickers, newTicker)
-		time.Sleep((1/700)* time.Second)
 	}
-	return tickers
+	return nil
 }

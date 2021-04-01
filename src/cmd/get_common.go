@@ -3,11 +3,36 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"tickers/src/models"
 
 	"github.com/spf13/cobra"
 )
+
+func generateMatrix () (map[string]map[string][]string) {
+	
+	common := make(map[string]map[string][]string)
+	
+	exchanges := GetAvailableExchangesMethod()
+
+	var tickers [][]models.Ticker
+
+	for n := 0; n < len(exchanges) - 1; n++ {
+		tickers = append(tickers, TickersFuncs[exchanges[n]]())
+		tickers = append(tickers, TickersFuncs[exchanges[n + 1]]())
+		symbols := GetCommonSymbols(tickers)
+		d := make(map[string][]string)
+		if symbols != nil {
+			d[exchanges[n + 1]] = symbols
+			common[exchanges[n]] = d
+		}
+	}
+
+	j, _ := json.Marshal(common)
+	ioutil.WriteFile("common_matrix.json", j, 0643)
+	return common
+}
 
 // GetCommonSymbols ...
 func GetCommonSymbols(data [][]models.Ticker) []string {
@@ -60,9 +85,16 @@ var listCommonSymbolsCmd = &cobra.Command{
 	Args: cobra.MinimumNArgs(1),
 
 	Run: func(cmd *cobra.Command, args []string) {
-		commonSymbols := GetCommonSymbolsMethod(args)
-
-		common, _ := json.Marshal(commonSymbols)
-		fmt.Printf("%s\n", string(common))	
+		if args[0] == "matrix" {
+			commonSymbols := generateMatrix()
+	
+			common, _ := json.Marshal(commonSymbols)
+			fmt.Printf("%s\n", string(common))	
+		} else {
+			commonSymbols := GetCommonSymbolsMethod(args)
+	
+			common, _ := json.Marshal(commonSymbols)
+			fmt.Printf("%s\n", string(common))	
+		}
 	},
 }
