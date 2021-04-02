@@ -7,18 +7,11 @@ import (
 
 func getBitfinexRawSymbols () []interface{} {
 
-	log.Println("Getting symbols data from bitfinex.")
+	log.Println("Getting symbols from bitfinex.")
 
-	url := APIURL + "/conf/pub:map:currency:sym"
+	url := APIURL + "/conf/pub:list:currency"
 
 	data := utils.MakeRequest(url)
 
-	var symbols []interface{}
-	// log.Println(data)
-	parsed := data.([]interface{})
-	for _, i := range parsed {
-		symbols = append(symbols, i.([]interface{}))
-	}
-
-	return symbols
+	return data.([]interface{})
 }

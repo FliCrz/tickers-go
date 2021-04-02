@@ -11,47 +11,45 @@ var APIURL = "https://api-pub.bitfinex.com/v2"
 
 
 // GetTickers ...
-func GetTickers() []models.Ticker {
+func GetTickers() (tickers []models.Ticker) {
 
 	url := APIURL + "/tickers?symbols=ALL"
 	
 	data := utils.MakeRequest(url)
 	
-	var tickers []models.Ticker
-	
 	parsed := data.([]interface{})
 
 	symbolsList := getBitfinexRawSymbols()
 
+	symbols := symbolsList[0]
+
+	// log.Println(symbolsList)
+
 	for _, i := range parsed {
-
+		
 		reparsed := i.([]interface{})
+		
+		rawSymbol := reparsed[0].(string)
+		
+		var coin string
+		var cur string
+		var symbol string
+		
+		if strings.Index(rawSymbol, "t") == 0 {
+			
+			symbol = rawSymbol[1:]
 
-		symbol := reparsed[0].(string)
-
-		if strings.Index(symbol, "t") == 0 && strings.Contains(symbol, ":") {
-			
-			symbol = symbol[1:]
-			rawCoin := strings.Split(symbol, ":")[0]
-			rawCur := strings.Split(symbol, ":")[1]
-			
-			var coin string
-			var cur string
-			
-			
-			for _, s := range symbolsList {
-				i := s.([]interface{})[0]
-				j := s.([]interface{})[1]
-				
-				// log.Println(i, j)
-
-				if rawCoin == i {
-					coin = strings.ToUpper(j.(string))
-				} else if rawCur == i {
-					cur = strings.ToUpper(j.(string))
-				} else {
-					cur = rawCur
-					coin = rawCoin
+			if strings.Contains(symbol, ":") {
+				coin = strings.Split(symbol, ":")[0]
+				cur = strings.Split(symbol, ":")[1]
+			} else {
+				for _, s := range symbols.([]interface{}) {
+					// log.Println(s)
+					if strings.Index(symbol, s.(string)) == 0 {
+						coin = s.(string)
+					} else if strings.Index(symbol, s.(string)) > 2 {
+						cur = s.(string)
+					}
 				}
 			}
 
@@ -76,6 +74,5 @@ func GetTickers() []models.Ticker {
 				Timestamp: int(time.Now().Unix())})
 		}
 	}
-
 	return tickers
 }
