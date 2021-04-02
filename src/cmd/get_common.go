@@ -16,17 +16,28 @@ func generateMatrix () (map[string]map[string][]string) {
 	
 	exchanges := GetAvailableExchangesMethod()
 
-	var tickers [][]models.Ticker
-
-	for n := 0; n < len(exchanges) - 1; n++ {
-		tickers = append(tickers, TickersFuncs[exchanges[n]]())
-		tickers = append(tickers, TickersFuncs[exchanges[n + 1]]())
-		symbols := GetCommonSymbols(tickers)
+	
+	tmap := make(map[string][]models.Ticker)
+	
+	for _, e := range exchanges {
+		log.Printf("Getting tickers for %s\n", e)
+		tmap[e] = TickersFuncs[e]()
+	}
+	
+	for n, v := range tmap {
 		d := make(map[string][]string)
-		if symbols != nil {
-			d[exchanges[n + 1]] = symbols
-			common[exchanges[n]] = d
+		for m, w := range tmap {
+			if n != m {
+				var tickers [][]models.Ticker
+				log.Printf("Generating matrix for %s %s\n", n, m)
+				tickers = append(tickers, v, w)
+				symbols := GetCommonSymbols(tickers)
+				if symbols != nil {
+					d[m] = symbols
+				}
+			}
 		}
+		common[n] = d
 	}
 
 	j, _ := json.Marshal(common)

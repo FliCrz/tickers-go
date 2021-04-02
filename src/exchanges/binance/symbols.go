@@ -1,12 +1,10 @@
 package binance
 
 import (
-	"log"
 	"tickers/src/utils"
 )
 
 func getSymbols() []interface{} {
-	log.Println("Getting symbols from binance")
 
 	url := APIURL + "/exchangeInfo"
 	data := utils.MakeRequest(url)
