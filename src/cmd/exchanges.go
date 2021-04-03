@@ -17,7 +17,7 @@ func GetAvailableExchangesMethod () []string {
 
 	exchanges := []string {
 		"bequant",
-		"bibox",
+		// "bibox",
 		"binance",
 		"bitfinex",
 		"bitstamp",
