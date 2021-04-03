@@ -17,13 +17,17 @@ func GetAvailableExchangesMethod () []string {
 
 	exchanges := []string {
 		"bequant",
+		"bibox",
 		"binance",
 		"bitfinex",
 		"bitstamp",
 		"bittrex",
 		"btcpop",
+		"cexio",
 		"crex24",
+		"crypto.com",
 		// "coinbasepro",
+		"coinex",
 		"hitbtc",
 		"huobi",
 		"kraken",

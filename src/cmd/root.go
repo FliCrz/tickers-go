@@ -4,13 +4,17 @@ import (
 	"fmt"
 	"os"
 	"tickers/src/exchanges/bequant"
+	"tickers/src/exchanges/bibox"
 	"tickers/src/exchanges/binance"
 	"tickers/src/exchanges/bitfinex"
 	"tickers/src/exchanges/bitstamp"
 	"tickers/src/exchanges/bittrex"
 	"tickers/src/exchanges/btcpop"
+	"tickers/src/exchanges/cexio"
 	"tickers/src/exchanges/coinbasepro"
+	"tickers/src/exchanges/coinex"
 	"tickers/src/exchanges/crex24"
+	"tickers/src/exchanges/cryptocom"
 	"tickers/src/exchanges/hitbtc"
 	"tickers/src/exchanges/huobi"
 	"tickers/src/exchanges/kraken"
@@ -31,13 +35,17 @@ var Verbose bool
 // TickersFuncs ...
 var TickersFuncs = map[string]func() []models.Ticker {
 	"bequant": bequant.GetTickers,
+	"bibox": bibox.GetTickers,
 	"binance": binance.GetTickers,
 	"bitfinex": bitfinex.GetTickers,
 	"bitstamp": bitstamp.GetTickers,
 	"bittrex": bittrex.GetTickers,
 	"btcpop": btcpop.GetTickers,
+	"cexio": cexio.GetTickers,
 	"crex24": crex24.GetTickers,
+	"crypto.com": cryptocom.GetTickers,
 	"coinbasepro": coinbasepro.GetTickers,
+	"coinex": coinex.GetTickers,
 	"hitbtc": hitbtc.GetTickers,
 	"huobi": huobi.GetTickers,
 	"kraken": kraken.GetTickers,
@@ -56,8 +64,11 @@ var UrlFuncs = map[string]func(string, string) string {
 	"bitstamp": bitstamp.GenerateTradeUrl,
 	"bittrex": bittrex.GenerateTradeUrl,
 	"btcpop": btcpop.GenerateTradeUrl,
+	"cexio": cexio.GenerateTradeUrl,
 	"crex24": crex24.GenerateTradeUrl,
+	"crypto.com": cryptocom.GenerateTradeUrl,
 	"coinbasepro": coinbasepro.GenerateTradeUrl,
+	"coinex": coinex.GenerateTradeUrl,
 	"hitbtc": hitbtc.GenerateTradeUrl,
 	"huobi": huobi.GenerateTradeUrl,
 	"kraken": kraken.GenerateTradeUrl,

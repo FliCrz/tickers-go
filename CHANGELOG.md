@@ -1,3 +1,10 @@
+# v0.1.13
+- added coinex
+- added cexio
+- added bibox (too slow!)
+- added crypto.com
+
+
 # v0.1.12
 - added common_matrix method
 
