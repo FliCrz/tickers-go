@@ -7,7 +7,7 @@ import (
 
 func GenerateTradeUrl (coin, cur string) string {
 	return fmt.Sprintf(
-		"https://graviex.net/markets/%s_%s", 
+		"https://graviex.net/markets/%s%s", 
 		strings.ToLower(coin), 
 		strings.ToLower(cur),
 	)
