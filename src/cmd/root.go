@@ -15,6 +15,7 @@ import (
 	"tickers/src/exchanges/coinex"
 	"tickers/src/exchanges/crex24"
 	"tickers/src/exchanges/cryptocom"
+	"tickers/src/exchanges/graviex"
 	"tickers/src/exchanges/hitbtc"
 	"tickers/src/exchanges/huobi"
 	"tickers/src/exchanges/kraken"
@@ -46,6 +47,7 @@ var TickersFuncs = map[string]func() []models.Ticker {
 	"crypto.com": cryptocom.GetTickers,
 	"coinbasepro": coinbasepro.GetTickers,
 	"coinex": coinex.GetTickers,
+	"graviex": graviex.GetTickers,
 	"hitbtc": hitbtc.GetTickers,
 	"huobi": huobi.GetTickers,
 	"kraken": kraken.GetTickers,
@@ -69,6 +71,7 @@ var UrlFuncs = map[string]func(string, string) string {
 	"crypto.com": cryptocom.GenerateTradeUrl,
 	"coinbasepro": coinbasepro.GenerateTradeUrl,
 	"coinex": coinex.GenerateTradeUrl,
+	"graviex": graviex.GenerateTradeUrl,
 	"hitbtc": hitbtc.GenerateTradeUrl,
 	"huobi": huobi.GenerateTradeUrl,
 	"kraken": kraken.GenerateTradeUrl,

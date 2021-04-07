@@ -1,3 +1,6 @@
+# v0.1.14
+- added graviex
+
 # v0.1.13
 - added coinex
 - added cexio

@@ -28,6 +28,7 @@ func GetAvailableExchangesMethod () []string {
 		"crypto.com",
 		// "coinbasepro",
 		"coinex",
+		"graviex",
 		"hitbtc",
 		"huobi",
 		"kraken",
