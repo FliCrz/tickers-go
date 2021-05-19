@@ -52,6 +52,10 @@ func GetTickers() (tickers []models.Ticker) {
 					}
 				}
 			}
+			
+			if coin == "DSH" {
+				coin = "DASH"
+			}
 
 			bidPrice := reparsed[1].(float64)
 			bidQty := reparsed[2].(float64)

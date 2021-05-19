@@ -1,3 +1,6 @@
+# v0.1.15
+- fixed DASH return in bitfinex (DSH)
+
 # v0.1.14
 - added graviex
 
